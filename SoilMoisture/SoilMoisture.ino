@@ -1,22 +1,11 @@
-/***************************************************
- This example reads Capacitive Soil Moisture Sensor.
- 
- Created 2015-10-21
- By berinie Chen <bernie.chen@dfrobot.com>
- 
- GNU Lesser General Public License.
- See <http://www.gnu.org/licenses/> for details.
- All above must be included in any redistribution
- ****************************************************/
-
 /***********Notice and Trouble shooting***************
- 1.Connection and Diagram can be found here: https://www.dfrobot.com/wiki/index.php?title=Capacitive_Soil_Moisture_Sensor_SKU:SEN0193
- 2.This code is tested on Arduino Uno.
- 3.Sensor is connect to Analog 0 port.
+ 1.This code is tested on Arduino Uno.
+ 2.Sensor is connect to Analog 0 port. Sensor is connected to 3.3V and GND //Capacitive soil moisture sensor
+ 3.Relay is connected to Digital 8 port. Raly is connected to 5V and GND  //JQC-3FF-S-Z
  ****************************************************/
 
-const int AirValue = 600;   //you need to replace this value with Value_1
-const int WaterValue = 280;  //you need to replace this value with Value_2
+const int AirValue = 600;
+const int WaterValue = 280;
 int intervals = (AirValue - WaterValue)/3;   //(600-285)/3=105
 int soilMoistureValue = 0;
 int pinOut = 8;
@@ -27,11 +16,11 @@ void setup() {
 }
 void loop() {
 soilMoistureValue = analogRead(A0);  //put Sensor insert into soil
-if(soilMoistureValue > WaterValue && soilMoistureValue < (WaterValue + intervals)) //moisture > 285 & moisture < 390
+if(soilMoistureValue > WaterValue && soilMoistureValue < (WaterValue + intervals)) //moisture > 280 & moisture < 385
 {
   Serial.println("Very Wet");
 }
-else if(soilMoistureValue > (WaterValue + intervals) && soilMoistureValue < (AirValue - intervals))
+else if(soilMoistureValue > (WaterValue + intervals) && soilMoistureValue < (AirValue - intervals)) //moisture > 385 & moisture < 490
 {
   Serial.println("Wet");
 }
@@ -42,7 +31,7 @@ else if(soilMoistureValue < AirValue && soilMoistureValue > (AirValue - interval
 Serial.println(soilMoistureValue);
 
 
-  if (soilMoistureValue >= 500){
+  if (soilMoistureValue >= 520){
     digitalWrite(pinOut, HIGH);
     delay(5000);
   }
