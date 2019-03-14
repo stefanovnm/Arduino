@@ -5,7 +5,7 @@
  ****************************************************/
 
 const int AirValue = 600;
-const int WaterValue = 280;
+const int WaterValue = 285;
 int intervals = (AirValue - WaterValue)/3;   //(600-285)/3=105
 int soilMoistureValue = 0;
 int pinOut = 8;
@@ -16,15 +16,15 @@ void setup() {
 }
 void loop() {
 soilMoistureValue = analogRead(A0);  //put Sensor insert into soil
-if(soilMoistureValue > WaterValue && soilMoistureValue < (WaterValue + intervals)) //moisture > 280 & moisture < 385
+if(soilMoistureValue > WaterValue && soilMoistureValue < (WaterValue + intervals)) //moisture > 285 & moisture < 390
 {
   Serial.println("Very Wet");
 }
-else if(soilMoistureValue > (WaterValue + intervals) && soilMoistureValue < (AirValue - intervals)) //moisture > 385 & moisture < 490
+else if(soilMoistureValue > (WaterValue + intervals) && soilMoistureValue < (AirValue - intervals)) //moisture > 390 & moisture < 495
 {
   Serial.println("Wet");
 }
-else if(soilMoistureValue < AirValue && soilMoistureValue > (AirValue - intervals))
+else if(soilMoistureValue < AirValue && soilMoistureValue > (AirValue - intervals)) //moisture > 495 & moisture < 600
 {
   Serial.println("Dry");
 }
